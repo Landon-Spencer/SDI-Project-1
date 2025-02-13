@@ -1,0 +1,57 @@
+body {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(6, 1fr);
+  gap: 8px;
+  background-color: antiquewhite;
+  margin: 20px;
+}
+
+header {
+  grid-column: span 5 / span 5;
+  grid-column-start: 1;
+  grid-row-start: 1;
+  background-color: lightgray;
+  border-radius: 20px;
+}
+
+.headWrapper {
+  display: flex;
+  justify-content: center;
+}
+
+#pageTitle {
+  justify-self: left;
+}
+
+.navBar {
+  grid-row: span 6 / span 6;
+  grid-row-start: 2;
+  background-color: aqua;
+  border-radius: 20px;
+}
+
+.navWrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.mainBody {
+  grid-column: span 4 / span 4;
+  grid-row: span 5 / span 5;
+  grid-row-start: 2;
+  background-color: white;
+  border-radius: 20px;
+}
+
+.mainWrapper {
+  display: flex;
+}
+
+footer {
+  grid-column: span 4 / span 4;
+  grid-column-start: 2;
+  grid-row-start: 7;
+  background-color: gray;
+  border-radius: 20px;
+}
