@@ -4,7 +4,7 @@ body {
   grid-template-rows: repeat(6, 1fr);
   gap: 8px;
   background-color: antiquewhite;
-  margin: 20px;
+  margin: none;
 }
 
 header {
