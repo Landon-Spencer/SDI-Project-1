@@ -1,5 +1,9 @@
 const searchBaseURL = 'https://collectionapi.metmuseum.org/public/collection/v1/search?hasImages=true&isHighlight=true&isPublicDomain=true&q=';
-const objectIdURL = 'https://collectionapi.metmuseum.org/public/collection/v1/objects/'
+const objectIdURL = 'https://collectionapi.metmuseum.org/public/collection/v1/objects/';
+const artTitle = document.getElementById('title');
+const artDisplayName = document.getElementById('artist-display-name');
+const artObjectDate = document.getElementById('object-date');
+const artMedium = document.getElementById('medium');
 
 document.addEventListener('DOMContentLoaded', () => {
   const searchButton = document.getElementById('search');
@@ -9,6 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const searchBack = document.getElementById('search-back');
   let artStyleIdList;
   let artStyleIdListLenght;
+
 
   searchButton.addEventListener('click', (event) => {
     event.preventDefault();
@@ -60,19 +65,24 @@ document.addEventListener('DOMContentLoaded', () => {
 async function displayArtist(idArray, idCount) {
   console.log('artStyleIdList:', idArray);
   const artistId = idArray.objectIDs[idCount];
-  // console.log('artistId:', artistId);
+  console.log('artistId:', artistId);
   const currentArtObject = artObjectFetch(artistId);
   currentArtObject.then((currentArtObject) => {
       let imageURL = currentArtObject.primaryImage
       // console.log('imageURL:', imageURL)
       var artistImage = document.createElement('img');
-      artistImage.id = 'displayImage';
+      artistImage.id = 'display-image';
       artistImage.maxWidth = '100%';
       artistImage.height = '500';
       artistImage.src = imageURL;
-      const mainDisplay = document.querySelector('.mainWrapper');
-      const oldDisplayImage = document.getElementById('displayImage');
+      const mainDisplay = document.querySelector('.main-wrapper');
+      const oldDisplayImage = document.getElementById('display-image');
       mainDisplay.replaceChild(artistImage, oldDisplayImage);
+
+      artTitle.innerHTML = `Title: ${currentArtObject.title}`;
+      artDisplayName.innerHTML = `Artist Display Name: ${currentArtObject.artistDisplayName}`;
+      artObjectDate.innerHTML = `Object Date: ${currentArtObject.objectDate}`;
+      artMedium.innerHTML = `Medium: ${currentArtObject.medium}`;
    });
   // imageURL.then((imageURL) => console.log('imageURL:', imageURL));
 
