@@ -3,7 +3,7 @@ body {
   grid-template-columns: repeat(5, 1fr);
   grid-template-rows: repeat(6, 1fr);
   gap: 8px;
-  background-color: antiquewhite;
+  background-color: black;
   margin: none;
 }
 
@@ -11,7 +11,7 @@ header {
   grid-column: span 5 / span 5;
   grid-column-start: 1;
   grid-row-start: 1;
-  background-color: lightgray;
+  background-color: antiquewhite;
   border-radius: 20px;
 }
 
@@ -24,7 +24,11 @@ header {
   justify-self: left;
 }
 
-.navBar {
+.headWrapper #pageTitle {
+  display: inline-block;
+}
+
+/* .navBar {
   grid-row: span 6 / span 6;
   grid-row-start: 2;
   background-color: aqua;
@@ -34,10 +38,10 @@ header {
 .navWrapper {
   display: flex;
   flex-direction: column;
-}
+} */
 
 .mainBody {
-  grid-column: span 4 / span 4;
+  grid-column: span 5 / span 5;
   grid-row: span 5 / span 5;
   grid-row-start: 2;
   background-color: white;
@@ -48,10 +52,10 @@ header {
   display: flex;
 }
 
-footer {
-  grid-column: span 4 / span 4;
-  grid-column-start: 2;
+/* footer {
+  grid-column: span 5 / span 5;
+  grid-column-start: 1;
   grid-row-start: 7;
   background-color: gray;
   border-radius: 20px;
-}
+} */

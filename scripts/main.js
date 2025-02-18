@@ -1,9 +1,11 @@
 const searchBaseURL = 'https://collectionapi.metmuseum.org/public/collection/v1/search?hasImages=true&isHighlight=true&isPublicDomain=true&q=';
 const objectIdURL = 'https://collectionapi.metmuseum.org/public/collection/v1/objects/';
+const refCount = document.getElementById('reference-count');
 const artTitle = document.getElementById('title');
 const artDisplayName = document.getElementById('artist-display-name');
 const artObjectDate = document.getElementById('object-date');
 const artMedium = document.getElementById('medium');
+const artDisplayImage = document.getElementById('display-image');
 
 document.addEventListener('DOMContentLoaded', () => {
   const searchButton = document.getElementById('search');
@@ -12,7 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const searchForward = document.getElementById('search-forward');
   const searchBack = document.getElementById('search-back');
   let artStyleIdList;
-  let artStyleIdListLenght;
+  let artStyleIdListLength;
 
 
   searchButton.addEventListener('click', (event) => {
@@ -24,7 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // artStyleIdList.then((idArray) => console.log(idArray[0]));
     artIdCount = 0;
     // const artistId = artStyleIdList.then((idArray) => idArray[artIdCount]);
-    artStyleIdList.then((idArray) => artStyleIdListLenght = idArray.total);
+    artStyleIdList.then((idArray) => artStyleIdListLength = idArray.total);
     artStyleIdList.then((idArray) => displayArtist(idArray, artIdCount));
     // const currentArtObject = artistId.then((artistId) => artObjectFetch(artistId));
     // artistId.then((artistId) => console.log('Artist Object:', artObjectFetch(artistId)));
@@ -38,11 +40,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
   searchForward.addEventListener('click', (event) => {
     event.preventDefault();
-    // console.log('artStyleIdList length:', artStyleIdListLenght);
-    if (artStyleIdList && artIdCount < artStyleIdListLenght) {
+    // console.log('artStyleIdList length:', artStyleIdListLength);
+    if (artStyleIdList && artIdCount < artStyleIdListLength) {
       artIdCount++;
       artStyleIdList.then((idArray) => displayArtist(idArray, artIdCount));
-    } else if (artStyleIdList && artIdCount == artStyleIdListLenght) {
+    } else if (artStyleIdList && artIdCount == artStyleIdListLength) {
       artStyleIdList.then((idArray) => displayArtist(idArray, artIdCount));
     }
     console.log('artIdCount:', artIdCount);
@@ -50,7 +52,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   searchBack.addEventListener('click', (event) => {
     event.preventDefault();
-    // console.log('artStyleIdList length:', artStyleIdListLenght);
+    // console.log('artStyleIdList length:', artStyleIdListLength);
     if (artStyleIdList && artIdCount > 0) {
       artIdCount--;
       artStyleIdList.then((idArray) => displayArtist(idArray, artIdCount));
@@ -70,15 +72,16 @@ async function displayArtist(idArray, idCount) {
   currentArtObject.then((currentArtObject) => {
       let imageURL = currentArtObject.primaryImage
       // console.log('imageURL:', imageURL)
-      var artistImage = document.createElement('img');
-      artistImage.id = 'display-image';
-      artistImage.maxWidth = '100%';
-      artistImage.height = '500';
-      artistImage.src = imageURL;
-      const mainDisplay = document.querySelector('.main-wrapper');
-      const oldDisplayImage = document.getElementById('display-image');
-      mainDisplay.replaceChild(artistImage, oldDisplayImage);
-
+      // var artistImage = document.createElement('img');
+      // artistImage.id = 'display-image';
+      // artistImage.maxWidth = '100%';
+      // artistImage.height = '500';
+      artDisplayImage.src = imageURL;
+      // const mainDisplay = document.querySelector('.main-wrapper');
+      // const oldDisplayImage = document.getElementById('display-image');
+      // mainDisplay.replaceChild(artistImage, oldDisplayImage);
+      // console.log('artStyleIdListLength', artStyleIdListLength);
+      refCount.innerHTML = `${idCount + 1} of ${idArray.objectIDs.length}`;
       artTitle.innerHTML = `Title: ${currentArtObject.title}`;
       artDisplayName.innerHTML = `Artist Display Name: ${currentArtObject.artistDisplayName}`;
       artObjectDate.innerHTML = `Object Date: ${currentArtObject.objectDate}`;
