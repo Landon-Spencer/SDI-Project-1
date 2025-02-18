@@ -32,6 +32,30 @@ h1 {
   justify-self: left;
 }
 
+.nav-wrapper {
+  overflow: hidden;
+  align-content: center;
+}
+
+.nav-wrapper a {
+  float: left;
+  color: #504b38;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+.nav-wrapper a:hover {
+  background-color: #f8f3d9;
+  color: #504b38;
+}
+
+.nav-wrapper a.active {
+  background-color: #504b38;
+  color: #f8f3d9;
+}
+
 /* .navBar {
   grid-row: span 6 / span 6;
   grid-row-start: 2;
