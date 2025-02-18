@@ -13,17 +13,17 @@ document.addEventListener('DOMContentLoaded', () => {
   let artIdCount = 0;
   const searchForward = document.getElementById('search-forward');
   const searchBack = document.getElementById('search-back');
-  const addFavorite = document.getElementById('add-to-favorites');
-  let artStyleIdList;
-  let artStyleIdListLength;
+  const removeFavorite = document.getElementById('remove-favorites');
 
   let storedFavorites = {
     objectIDs: JSON.parse(localStorage.getItem('storedfavorites'))
   };
 
+  let storedFavoritesLength = storedFavorites.objectIDs.length;
+
   console.log('storedfavorites:', storedFavorites);
 
-  displayArtist(storedFavorites, 0);
+  displayArtist(storedFavorites, artIdCount);
 
   // searchButton.addEventListener('click', (event) => {
   //   event.preventDefault();
@@ -49,11 +49,11 @@ document.addEventListener('DOMContentLoaded', () => {
   searchForward.addEventListener('click', (event) => {
     event.preventDefault();
     // console.log('artStyleIdList length:', artStyleIdListLength);
-    if (artStyleIdList && artIdCount < artStyleIdListLength) {
+    if (storedFavorites && artIdCount < storedFavoritesLength) {
       artIdCount++;
-      artStyleIdList.then((idArray) => displayArtist(idArray, artIdCount));
-    } else if (artStyleIdList && artIdCount == artStyleIdListLength - 1) {
-      artStyleIdList.then((idArray) => displayArtist(idArray, artIdCount));
+      displayArtist(storedFavorites, artIdCount);
+    } else if (storedFavorites && artIdCount == storedFavoritesLength - 1) {
+      displayArtist(idArray, artIdCount);
     }
     console.log('artIdCount:', artIdCount);
   })
@@ -61,22 +61,22 @@ document.addEventListener('DOMContentLoaded', () => {
   searchBack.addEventListener('click', (event) => {
     event.preventDefault();
     // console.log('artStyleIdList length:', artStyleIdListLength);
-    if (artStyleIdList && artIdCount > 0) {
+    if (storedFavorites && artIdCount > 0) {
       artIdCount--;
-      artStyleIdList.then((idArray) => displayArtist(idArray, artIdCount));
-    } else if (artStyleIdList && artIdCount == 0) {
-      artStyleIdList.then((idArray) => displayArtist(idArray, artIdCount));
+      displayArtist(storedFavorites, artIdCount);
+    } else if (storedFavorites && artIdCount == 0) {
+      displayArtist(storedFavorites, artIdCount);
     }
     console.log('artIdCount:', artIdCount);
   })
 
-  // addFavorite.addEventListener('click', (event) => {
-  //   event.preventDefault();
-  //   artStyleIdList.then((idArray) => {
-  //     favorites.push(idArray.objectIDs[artIdCount]);
-  //     console.log(favorites);
-  //   })
-  // })
+  removeFavorite.addEventListener('click', (event) => {
+    event.preventDefault();
+    storedFavorites.objectIDs.splice(artIdCount, 1);
+    artIdCount--;
+    displayArtist(storedFavorites, artIdCount);
+    localStorage.setItem('storedfavorites', JSON.stringify(storedFavorites.objectIDs));
+  })
 
 })
 

@@ -7,7 +7,9 @@ const artDisplayName = document.getElementById('artist-display-name');
 const artObjectDate = document.getElementById('object-date');
 const artMedium = document.getElementById('medium');
 const artDisplayImage = document.getElementById('display-image');
-const favorites = [];
+const favorites = {
+  objectIDs: JSON.parse(localStorage.getItem('storedfavorites'))
+};
 
 document.addEventListener('DOMContentLoaded', () => {
   const searchButton = document.getElementById('search');
@@ -67,8 +69,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
   addFavorite.addEventListener('click', (event) => {
     event.preventDefault();
+    favorites = {
+      objectIDs: JSON.parse(localStorage.getItem('storedfavorites'))
+    }
     artStyleIdList.then((idArray) => {
-      favorites.push(idArray.objectIDs[artIdCount]);
+      favorites.objectIDs.push(idArray.objectIDs[artIdCount]);
       console.log(favorites);
       localStorage.setItem('storedfavorites', JSON.stringify(favorites));
     })
