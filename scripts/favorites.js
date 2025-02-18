@@ -1,4 +1,3 @@
-
 const searchBaseURL = 'https://collectionapi.metmuseum.org/public/collection/v1/search?hasImages=true&isHighlight=true&isPublicDomain=true&q=';
 const objectIdURL = 'https://collectionapi.metmuseum.org/public/collection/v1/objects/';
 const refCount = document.getElementById('reference-count');
@@ -7,7 +6,6 @@ const artDisplayName = document.getElementById('artist-display-name');
 const artObjectDate = document.getElementById('object-date');
 const artMedium = document.getElementById('medium');
 const artDisplayImage = document.getElementById('display-image');
-const favorites = [];
 
 document.addEventListener('DOMContentLoaded', () => {
   const searchButton = document.getElementById('search');
@@ -19,27 +17,34 @@ document.addEventListener('DOMContentLoaded', () => {
   let artStyleIdList;
   let artStyleIdListLength;
 
+  let storedFavorites = {
+    objectIDs: JSON.parse(localStorage.getItem('storedfavorites'))
+  };
 
-  searchButton.addEventListener('click', (event) => {
-    event.preventDefault();
-    const searchArtStyle = artStyle.value;
-    // console.log('base + search: ' + searchBaseURL + searchArtStyle);
-    // console.log(objectIdList(searchArtStyle));
-    artStyleIdList = objectIdList(searchArtStyle);
-    // artStyleIdList.then((idArray) => console.log(idArray[0]));
-    artIdCount = 0;
-    // const artistId = artStyleIdList.then((idArray) => idArray[artIdCount]);
-    artStyleIdList.then((idArray) => artStyleIdListLength = idArray.total);
-    artStyleIdList.then((idArray) => displayArtist(idArray, artIdCount));
-    // const currentArtObject = artistId.then((artistId) => artObjectFetch(artistId));
-    // artistId.then((artistId) => console.log('Artist Object:', artObjectFetch(artistId)));
-    // artistId.then((artistId) => displayArtist(artistId));
-    // const requestedIds = objectIdFetch(searchArtStyle);
-    // var artistImage = document.createElement('img');
-    // artistImage.src = currentArtObject.primaryImage;
-    // const mainDisplay = document.getElementById('mainWrapper');
-    // mainDisplay.appendChild(artistImage);
-  })
+  console.log('storedfavorites:', storedFavorites);
+
+  displayArtist(storedFavorites, 0);
+
+  // searchButton.addEventListener('click', (event) => {
+  //   event.preventDefault();
+  //   const searchArtStyle = artStyle.value;
+  //   // console.log('base + search: ' + searchBaseURL + searchArtStyle);
+  //   // console.log(objectIdList(searchArtStyle));
+  //   artStyleIdList = objectIdList(searchArtStyle);
+  //   // artStyleIdList.then((idArray) => console.log(idArray[0]));
+  //   artIdCount = 0;
+  //   // const artistId = artStyleIdList.then((idArray) => idArray[artIdCount]);
+  //   artStyleIdList.then((idArray) => artStyleIdListLength = idArray.total);
+  //   artStyleIdList.then((idArray) => displayArtist(idArray, artIdCount));
+  //   // const currentArtObject = artistId.then((artistId) => artObjectFetch(artistId));
+  //   // artistId.then((artistId) => console.log('Artist Object:', artObjectFetch(artistId)));
+  //   // artistId.then((artistId) => displayArtist(artistId));
+  //   // const requestedIds = objectIdFetch(searchArtStyle);
+  //   // var artistImage = document.createElement('img');
+  //   // artistImage.src = currentArtObject.primaryImage;
+  //   // const mainDisplay = document.getElementById('mainWrapper');
+  //   // mainDisplay.appendChild(artistImage);
+  // })
 
   searchForward.addEventListener('click', (event) => {
     event.preventDefault();
@@ -65,14 +70,13 @@ document.addEventListener('DOMContentLoaded', () => {
     console.log('artIdCount:', artIdCount);
   })
 
-  addFavorite.addEventListener('click', (event) => {
-    event.preventDefault();
-    artStyleIdList.then((idArray) => {
-      favorites.push(idArray.objectIDs[artIdCount]);
-      console.log(favorites);
-      localStorage.setItem('storedfavorites', JSON.stringify(favorites));
-    })
-  })
+  // addFavorite.addEventListener('click', (event) => {
+  //   event.preventDefault();
+  //   artStyleIdList.then((idArray) => {
+  //     favorites.push(idArray.objectIDs[artIdCount]);
+  //     console.log(favorites);
+  //   })
+  // })
 
 })
 
