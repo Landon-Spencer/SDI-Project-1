@@ -20,30 +20,32 @@ header {
 h1 {
   color: #504b38;
   font-family: Georgia, 'Times New Roman', Times, serif;
+  font-size: 35px;
 }
 
 .form-wrapper {
   align-content: center;
-  justify-self: right;
+  font-size: 25px;
+  /* justify-self: right; */
 }
 
 #page-title {
   align-content: center;
-  justify-self: left;
+  /* justify-self: left; */
 }
 
 .nav-wrapper {
-  overflow: hidden;
+  /* overflow: hidden; */
   align-content: center;
 }
 
 .nav-wrapper a {
-  float: left;
+  /* float: left; */
   color: #504b38;
-  text-align: center;
+  /* text-align: center; */
   padding: 14px 16px;
   text-decoration: none;
-  font-size: 17px;
+  font-size: 25px;
 }
 
 .nav-wrapper a:hover {
