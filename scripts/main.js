@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (artStyleIdList && artIdCount < artStyleIdListLength) {
       artIdCount++;
       artStyleIdList.then((idArray) => displayArtist(idArray, artIdCount));
-    } else if (artStyleIdList && artIdCount == artStyleIdListLength) {
+    } else if (artStyleIdList && artIdCount == artStyleIdListLength - 1) {
       artStyleIdList.then((idArray) => displayArtist(idArray, artIdCount));
     }
     console.log('artIdCount:', artIdCount);

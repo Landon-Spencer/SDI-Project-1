@@ -77,12 +77,11 @@ img {
   border-radius: 20px;
 }
 
-
-
-/* footer {
+footer {
   grid-column: span 5 / span 5;
   grid-column-start: 1;
   grid-row-start: 7;
-  background-color: gray;
+  background-color: black;
   border-radius: 20px;
-} */
+  color: white;
+}
