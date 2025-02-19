@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   searchForward.addEventListener('click', (event) => {
     event.preventDefault();
-    if (artStyleIdList && artIdCount < artStyleIdListLength) {
+    if (artStyleIdList && artIdCount < artStyleIdListLength - 1) {
       artIdCount++;
       artStyleIdList.then((idArray) => displayArtist(idArray, artIdCount));
     }
@@ -63,6 +63,7 @@ document.addEventListener('DOMContentLoaded', () => {
 async function displayArtist(idArray, idCount) {
   const artistId = idArray.objectIDs[idCount];
   const currentArtObject = artObjectFetch(artistId);
+  artDisplayImage.src = "/images/Spin@1x-1.9s-200px-200px.svg";
   currentArtObject.then((currentArtObject) => {
       let imageURL = currentArtObject.primaryImage
       artDisplayImage.src = imageURL;

@@ -54,6 +54,7 @@ document.addEventListener('DOMContentLoaded', () => {
 async function displayArtist(idArray, idCount) {
   const artistId = idArray[idCount];
   const currentArtObject = artObjectFetch(artistId);
+  artDisplayImage.src = "/images/Spin@1x-1.9s-200px-200px.svg";
   currentArtObject.then((currentArtObject) => {
       let imageURL = currentArtObject.primaryImage
       artDisplayImage.src = imageURL;
