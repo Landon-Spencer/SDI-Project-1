@@ -47,11 +47,6 @@ h1 {
   color: #504b38;
 }
 
-.nav-wrapper a.active {
-  background-color: #504b38;
-  color: #f8f3d9;
-}
-
 .main-body {
   grid-column: span 5 / span 5;
   grid-row: span 5 / span 5;
