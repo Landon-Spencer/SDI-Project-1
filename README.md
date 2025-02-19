@@ -8,7 +8,10 @@ Clone the project onto your machine by using the commands below for HTTPS, or SS
 ## How to Run the Project
 After you have a cloned folder with the project files run `open index.html` in the SDI-Project-1 folder. This should open a local version in your default browser.
 ## How to use the App
-Now that you have a web page showing you can choose one of the art style options in the top right select bar. After you select an option you can search the Metropolitan Museum API for that art style. The search will display the first item that it finds and you can use the arrows to search through all of the options that are returned.
+### Search Function
+Now that you have a web page showing you can choose one of the art style options in the top right select bar. After you select an option you can search the Metropolitan Museum API for that art style. The search will display the first item that it finds and you can use the arrows to search through all of the options that are returned. Due to copyright some of the artist may not have a display image, but their info can still be viewed at the bottom.
+### Favorites Function
+Once you find an art piece that you like you an add it to your favorites list. To do this you click on the **Add to Favorits** button below the image. The artist info will then be stored in local storage so that it can be viewed later. To view your favorites navigate to the **Favorites** page in the top right of the page and it will display your first favorite image. You can then scroll through all of your favorites by using the arrows. If you want to remove an art piece by clicking on the **Remove from Favorites** button below the image.
 ## Wireframe layout
 Below is my original wireframe layout built on Figma.
 ![Image of original wireframe layout](images/Screenshot%202025-02-18%20at%201.24.15 PM.png)<br>
