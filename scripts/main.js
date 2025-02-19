@@ -7,9 +7,7 @@ const artDisplayName = document.getElementById('artist-display-name');
 const artObjectDate = document.getElementById('object-date');
 const artMedium = document.getElementById('medium');
 const artDisplayImage = document.getElementById('display-image');
-const favorites = {
-  objectIDs: JSON.parse(localStorage.getItem('storedfavorites'))
-};
+let favorites = JSON.parse(localStorage.getItem('storedfavorites'));
 
 document.addEventListener('DOMContentLoaded', () => {
   const searchButton = document.getElementById('search');
@@ -25,27 +23,14 @@ document.addEventListener('DOMContentLoaded', () => {
   searchButton.addEventListener('click', (event) => {
     event.preventDefault();
     const searchArtStyle = artStyle.value;
-    // console.log('base + search: ' + searchBaseURL + searchArtStyle);
-    // console.log(objectIdList(searchArtStyle));
     artStyleIdList = objectIdList(searchArtStyle);
-    // artStyleIdList.then((idArray) => console.log(idArray[0]));
     artIdCount = 0;
-    // const artistId = artStyleIdList.then((idArray) => idArray[artIdCount]);
     artStyleIdList.then((idArray) => artStyleIdListLength = idArray.total);
     artStyleIdList.then((idArray) => displayArtist(idArray, artIdCount));
-    // const currentArtObject = artistId.then((artistId) => artObjectFetch(artistId));
-    // artistId.then((artistId) => console.log('Artist Object:', artObjectFetch(artistId)));
-    // artistId.then((artistId) => displayArtist(artistId));
-    // const requestedIds = objectIdFetch(searchArtStyle);
-    // var artistImage = document.createElement('img');
-    // artistImage.src = currentArtObject.primaryImage;
-    // const mainDisplay = document.getElementById('mainWrapper');
-    // mainDisplay.appendChild(artistImage);
   })
 
   searchForward.addEventListener('click', (event) => {
     event.preventDefault();
-    // console.log('artStyleIdList length:', artStyleIdListLength);
     if (artStyleIdList && artIdCount < artStyleIdListLength) {
       artIdCount++;
       artStyleIdList.then((idArray) => displayArtist(idArray, artIdCount));
@@ -57,7 +42,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   searchBack.addEventListener('click', (event) => {
     event.preventDefault();
-    // console.log('artStyleIdList length:', artStyleIdListLength);
     if (artStyleIdList && artIdCount > 0) {
       artIdCount--;
       artStyleIdList.then((idArray) => displayArtist(idArray, artIdCount));
@@ -69,11 +53,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
   addFavorite.addEventListener('click', (event) => {
     event.preventDefault();
-    favorites = {
-      objectIDs: JSON.parse(localStorage.getItem('storedfavorites'))
-    }
     artStyleIdList.then((idArray) => {
-      favorites.objectIDs.push(idArray.objectIDs[artIdCount]);
+      console.log('artId to add', idArray.objectIDs[artIdCount]);
+      console.log('favorites', favorites)
+      favorites.push(idArray.objectIDs[artIdCount]);
       console.log(favorites);
       localStorage.setItem('storedfavorites', JSON.stringify(favorites));
     })
@@ -88,23 +71,13 @@ async function displayArtist(idArray, idCount) {
   const currentArtObject = artObjectFetch(artistId);
   currentArtObject.then((currentArtObject) => {
       let imageURL = currentArtObject.primaryImage
-      // console.log('imageURL:', imageURL)
-      // var artistImage = document.createElement('img');
-      // artistImage.id = 'display-image';
-      // artistImage.maxWidth = '100%';
-      // artistImage.height = '500';
       artDisplayImage.src = imageURL;
-      // const mainDisplay = document.querySelector('.main-wrapper');
-      // const oldDisplayImage = document.getElementById('display-image');
-      // mainDisplay.replaceChild(artistImage, oldDisplayImage);
-      // console.log('artStyleIdListLength', artStyleIdListLength);
       refCount.innerHTML = `${idCount + 1} of ${idArray.objectIDs.length}`;
       artTitle.innerHTML = `Title: ${currentArtObject.title}`;
       artDisplayName.innerHTML = `Artist Display Name: ${currentArtObject.artistDisplayName}`;
       artObjectDate.innerHTML = `Object Date: ${currentArtObject.objectDate}`;
       artMedium.innerHTML = `Medium: ${currentArtObject.medium}`;
    });
-  // imageURL.then((imageURL) => console.log('imageURL:', imageURL));
 
 }
 
