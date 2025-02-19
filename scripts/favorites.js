@@ -20,13 +20,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
   searchForward.addEventListener('click', (event) => {
     event.preventDefault();
-    console.log('storedFavoritesLength', storedFavoritesLength);
-    console.log('artIdCount before', artIdCount);
     if (storedFavorites && artIdCount < storedFavoritesLength - 1) {
       artIdCount++;
       displayArtist(storedFavorites, artIdCount);
     }
-    console.log('artIdCount after', artIdCount);
   })
 
   searchBack.addEventListener('click', (event) => {
@@ -37,7 +34,6 @@ document.addEventListener('DOMContentLoaded', () => {
     } else if (storedFavorites && artIdCount == 0) {
       displayArtist(storedFavorites, artIdCount);
     }
-    console.log('artIdCount', artIdCount);
   })
 
   removeFavorite.addEventListener('click', (event) => {
